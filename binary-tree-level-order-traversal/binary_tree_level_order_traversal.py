@@ -16,6 +16,16 @@ class TreeNode:
 
 
 def levelOrderV1Recursive(root: Optional[TreeNode]) -> List[List[int]]:
+    """
+    Recursive solution to the problem
+    It takes in the root node and returns a list of lists, where each list
+    represents a level in the tree and contains the values of nodes at that
+    level
+
+    Time complexity: O(n)
+    Space complexity: O(n)
+    """
+
     if not root:
         # return an empty list if the root is None
         return []
@@ -48,21 +58,42 @@ def levelOrderV1Recursive(root: Optional[TreeNode]) -> List[List[int]]:
 
 
 def levelOrderV2Iterative(root: Optional[TreeNode]) -> List[List[int]]:
+    """
+    Iterative solution to the problem
+    It takes in the root node and returns a list of lists, where each list
+    represents a level in the tree and contains the values of nodes at that
+    level
+
+    Time complexity: O(n)
+    Space complexity: O(n)
+    """
+
     if not root:
+        # return an empty list if the root is None
         return []
 
+    # queue to store the nodes to be processed
     queue = [root]
     result = []
+
+    # while there are still nodes to be processed
     while queue:
+        # list to store the values of nodes at the current level
         level = []
 
+        # process all nodes at the current level
         for _ in range(len(queue)):
+            # remove the node from the front of the queue
             node = queue.pop(0)
+            # add the node's value to the current level list
             level.append(node.val)
             if node.left:
+                # if there is a left child, add it to the queue
                 queue.append(node.left)
             if node.right:
+                # if there is a right child, add it to the queue
                 queue.append(node.right)
 
+        # add the current level list to the result list
         result.append(level)
     return result
