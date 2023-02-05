@@ -15,6 +15,15 @@ class Node:
         self.children = children
 
 
-def preorder(root: Node) -> List[int]:
-    pass
-
+def preorderV1(root: Node) -> List[int]:
+    res = []
+        
+    def get_preorder(root: Node, res: List[int]) -> None:
+        if root:
+            res.append(root.val)
+            if root.children:
+                for child in root.children:
+                    get_preorder(child, res)
+    
+    get_preorder(root, res)
+    return res
