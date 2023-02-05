@@ -15,5 +15,22 @@ class TreeNode:
         self.right = right
 
 
-def levelOrder(root: Optional[TreeNode]) -> List[List[int]]:
-    pass
+def levelOrderV1Recursive(root: Optional[TreeNode]) -> List[List[int]]:
+    if not root:
+        return []
+
+    result = []
+
+    def helper(node, level):
+        if len(result) == level:
+            result.append([])
+
+        result[level].append(node.val)
+
+        if node.left:
+            helper(node.left, level + 1)
+        if node.right:
+            helper(node.right, level + 1)
+
+    helper(root, 0)
+    return result
