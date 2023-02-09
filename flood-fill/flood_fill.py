@@ -19,11 +19,11 @@ from typing import List
 
 
 def floodFillV1Recursive(
-        image: List[List[int]], sr: int, sc: int, newColor: int
+    image: List[List[int]], sr: int, sc: int, newColor: int
 ) -> List[List[int]]:
     R, C = len(image), len(image[0])
     color = image[sr][sc]
-    
+
     if color == newColor:
         return image
 
@@ -40,4 +40,29 @@ def floodFillV1Recursive(
                 dfs(r, c + 1)
 
     dfs(sr, sc)
+    return image
+
+
+def floodFillV2Iterative(
+    image: List[List[int]], sr: int, sc: int, newColor: int
+) -> List[List[int]]:
+    R, C = len(image), len(image[0])
+    color = image[sr][sc]
+
+    if color == newColor:
+        return image
+
+    stack = [(sr, sc)]
+    while stack:
+        r, c = stack.pop()
+        image[r][c] = newColor
+        if r >= 1 and image[r - 1][c] == color:
+            stack.append((r - 1, c))
+        if r + 1 < R and image[r + 1][c] == color:
+            stack.append((r + 1, c))
+        if c >= 1 and image[r][c - 1] == color:
+            stack.append((r, c - 1))
+        if c + 1 < C and image[r][c + 1] == color:
+            stack.append((r, c + 1))
+
     return image
