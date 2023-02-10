@@ -1,4 +1,4 @@
-def fib(n: int) -> int:
+def fibV1Recursive(n: int) -> int:
     if n <= 1:
         return n
-    return self.fib(n - 1) + self.fib(n - 2)
+    return fibV1Recursive(n - 1) + fibV1Recursive(n - 2)
