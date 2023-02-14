@@ -14,3 +14,20 @@ At the end of the game, there is at most one stone left.
 Return the weight of the last remaining stone. If there are no stones left,
 return 0.
 """
+
+
+from typing import List
+
+
+def lastStoneWeightSortAndInsertV1(stones: List[int]) -> int:
+    """
+    Sort stones and insert them back into the list
+    """
+
+    while len(stones) > 1:
+        stones.sort()
+        y = stones.pop()
+        x = stones.pop()
+        if x != y:
+            stones.append(y - x)
+    return stones[0] if stones else 0
