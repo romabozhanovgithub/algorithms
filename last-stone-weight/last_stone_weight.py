@@ -31,3 +31,17 @@ def lastStoneWeightSortAndInsertV1(stones: List[int]) -> int:
         if x != y:
             stones.append(y - x)
     return stones[0] if stones else 0
+
+
+def lastStoneWeightSortAndInsertV2(stones: List[int]) -> int:
+    stones.sort()
+
+    while stones:
+        y = stones.pop()
+        if not stones:
+            return y
+        x = stones.pop()
+        if x != y:
+            stones.append(y - x)
+            stones.sort()
+    return 0
