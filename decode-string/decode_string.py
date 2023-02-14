@@ -14,3 +14,29 @@ like 3a or 2[4].
 The test cases are generated so that the length of the output will never
 exceed 105.
 """
+
+
+def decodeStringV1Recursive(s: str) -> str:
+    res = ""
+    i = 0
+    while i < len(s):
+        if s[i].isdigit():
+            j = i + 1
+            while s[j].isdigit():
+                j += 1
+            k = int(s[i:j])
+            i = j + 1
+            cnt = 1
+            j = i
+            while cnt > 0:
+                if s[j] == "[":
+                    cnt += 1
+                elif s[j] == "]":
+                    cnt -= 1
+                j += 1
+            res += k * decodeStringV1Recursive(s[i:j - 1])
+            i = j
+        else:
+            res += s[i]
+            i += 1
+    return res
