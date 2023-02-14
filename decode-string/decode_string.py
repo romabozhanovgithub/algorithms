@@ -40,3 +40,30 @@ def decodeStringV1Recursive(s: str) -> str:
             res += s[i]
             i += 1
     return res
+
+
+def decodeStringV2Iterative(s: str) -> str:
+    stack = []
+    i = 0
+    while i < len(s):
+        if s[i].isdigit():
+            j = i + 1
+            while s[j].isdigit():
+                j += 1
+            stack.append(int(s[i:j]))
+            i = j
+        elif s[i] == "[":
+            stack.append("[")
+            i += 1
+        elif s[i] == "]":
+            tmp = ""
+            while stack[-1] != "[":
+                tmp = stack.pop() + tmp
+            stack.pop()
+            k = stack.pop()
+            stack.append(k * tmp)
+            i += 1
+        else:
+            stack.append(s[i])
+            i += 1
+    return "".join(stack)
