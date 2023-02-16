@@ -19,4 +19,23 @@ class TreeNode:
 def maxDepthV1Recursive(root: Optional[TreeNode]) -> int:
     if root is None:
         return 0
-    return 1 + max(maxDepthV1Recursive(root.left), maxDepthV1Recursive(root.right))
+    return 1 + max(
+        maxDepthV1Recursive(root.left),
+        maxDepthV1Recursive(root.right)
+    )
+
+
+def maxDepthV2Iterative(root: Optional[TreeNode]) -> int:
+    if root is None:
+        return 0
+    queue = [root]
+    depth = 0
+    while queue:
+        depth += 1
+        for _ in range(len(queue)):
+            node = queue.pop(0)
+            if node.left is not None:
+                queue.append(node.left)
+            if node.right is not None:
+                queue.append(node.right)
+    return depth
