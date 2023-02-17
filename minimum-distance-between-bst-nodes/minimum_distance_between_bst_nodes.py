@@ -26,3 +26,18 @@ def minDiffInBSTV1Recursive(root: Optional[TreeNode]) -> int:
             minDiffInBST(root.right, res)
         return res[0]
     return minDiffInBST(root, res)
+
+
+def minDiffInBSTV2Iterative(root: Optional[TreeNode]) -> int:
+    res = [float("inf"), -1] # [min, prev]
+    stack = []
+    while root or stack:
+        while root:
+            stack.append(root)
+            root = root.left
+        root = stack.pop()
+        if res[1] != -1:
+            res[0] = min(res[0], root.val - res[1])
+        res[1] = root.val
+        root = root.right
+    return res[0]
