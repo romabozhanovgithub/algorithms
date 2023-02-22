@@ -42,3 +42,36 @@ Example 3:
         3rd day: 3
         4th day: 1, 1
 """
+
+
+from typing import List
+
+
+def shipWithinDays(weights: List[int], days: int) -> int:
+    """
+    Time Complexity: O(nlogn)
+    Space Complexity: O(1)
+    """
+    def can_ship(weights: List[int], days: int, capacity: int) -> bool:
+        """
+        Time Complexity: O(n)
+        Space Complexity: O(1)
+        """
+        day = 1
+        current_weight = 0
+        for weight in weights:
+            if current_weight + weight > capacity:
+                day += 1
+                current_weight = 0
+            current_weight += weight
+        return day <= days
+
+    left = max(weights)
+    right = sum(weights)
+    while left < right:
+        mid = left + (right - left) // 2
+        if can_ship(weights, days, mid):
+            right = mid
+        else:
+            left = mid + 1
+    return left
